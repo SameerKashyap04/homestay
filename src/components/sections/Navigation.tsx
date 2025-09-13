@@ -7,6 +7,7 @@ import { Menu, X, Home, Calendar, Camera, User, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { fadeIn, slideInLeft, staggerContainer } from "@/lib/animations";
 import { Button } from "@/components/ui/Button";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const navItems = [
   { href: "/", label: "Home", icon: Home },
@@ -101,6 +102,15 @@ export function Navigation() {
 
           {/* CTA Button & Mobile Menu Toggle */}
           <div className="flex items-center space-x-4">
+            {/* Theme Toggle */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              <ThemeToggle />
+            </motion.div>
+
             <motion.div
               className="hidden lg:block"
               initial={{ opacity: 0, x: 20 }}
@@ -181,9 +191,14 @@ export function Navigation() {
                 ))}
                 
                 <motion.div
-                  className="pt-4 mt-4 border-t border-border"
+                  className="pt-4 mt-4 border-t border-border space-y-4"
                   variants={fadeIn}
                 >
+                  <div className="flex items-center justify-between">
+                    <span className="text-foreground font-medium">Theme</span>
+                    <ThemeToggle />
+                  </div>
+                  
                   <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
                     <Button 
                       variant="primary" 
